@@ -1,0 +1,11 @@
+.Color{
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+}
+
+.Color p{
+	margin: 3px 10px 3px 0;
+	padding: 3px 8px;
+	width: 100px;
+}
