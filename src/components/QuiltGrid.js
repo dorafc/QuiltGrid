@@ -5,11 +5,13 @@ import ColorList from './ColorList';
 import StyleOutput from './StyleOutput';
 import './style/QuiltGrid.css';
 
+
 class QuiltGrid extends Component {
 	constructor(props) {
     super(props);
     this.state = {
     	colorCounters: [[0, 1], [2, 3]],
+    	// X --> # of colummns, Y --> # of rows
     	cellCountX: 2,
     	cellCountY: 2,
     };
@@ -32,20 +34,18 @@ class QuiltGrid extends Component {
 		return {height: heightDim + 'px', width: widthDim + 'px'}
 	}
 
-	// out put grid based on form inputs
+	// return grid based on form inputs
 	renderGrid(){
 		// style for the grid output
 		const gridDimensions = this.calcGrid()
 		// copy of color counters from state
 		let gridColors = this.state.colorCounters.slice()
 
-		gridColors = gridColors.map((color, i) => 
-			<Cell 
-    		colorCount = {this.state.colorCounters[i]}
-    		changeColor = {() => this.changeColor(i)}
-    	/>
+		gridColors = gridColors.map((row, i) => 
+			this.renderRow(row, i)
   	)
 
+		console.log(gridColors)
 		return(
 			<div 
       	className="grid"
@@ -53,6 +53,18 @@ class QuiltGrid extends Component {
       >
       	{gridColors}
       </div>
+		)
+	}
+
+	// return row of cells for the grid output
+	renderRow(row, rowNum){
+		return(
+			row.map((color, i) => 
+				<Cell 
+	    		colorCount = {this.state.colorCounters[rowNum][i]}
+	    		changeColor = {() => this.changeColor(i)}
+	    	/>
+			)
 		)
 	}
 
@@ -70,34 +82,33 @@ class QuiltGrid extends Component {
 		let colorCounters = this.state.colorCounters.slice()
 
 		// add to every row
-		if (this.state.cellCountY > currentCol && this.state.cellCountY !== ''){
+		if (this.state.cellCountX > currentCol && this.state.cellCountX !== ''){
 			colorCounters.forEach((row) => {
-				for (let i = currentCol; i < this.state.cellCountY; i++){
+				for (let i = currentCol; i < this.state.cellCountX; i++){
 					row.push(0)
 				}
 			})
 		// remove from every row
-		}	else if (this.state.cellCountY < currentCol && this.state.cellCountY !== ''){
+		}	else if (this.state.cellCountX < currentCol && this.state.cellCountX !== ''){
 			colorCounters.forEach((row) => {
-				for (let i = this.state.cellCountY; i < currentCol; i++){
+				for (let i = this.state.cellCountX; i < currentCol; i++){
 					row.pop()
 				}
 			})
 		}
 
 		// add row
-		if (this.state.cellCountX > currentRow && this.state.cellCountX !== ''){
-			for (let i = currentRow; i < this.state.cellCountX; i++){
+		if (this.state.cellCountY > currentRow && this.state.cellCountY !== ''){
+			for (let i = currentRow; i < this.state.cellCountY; i++){
 					colorCounters.push(Array(colorCounters[0].length).fill(0))
 				}
 		}
-		if (this.state.cellCountX < currentRow && this.state.cellCountX !== ''){
-			for (let i = this.state.cellCountX; i < currentRow; i++){
+		// remove row
+		if (this.state.cellCountY < currentRow && this.state.cellCountY !== ''){
+			for (let i = this.state.cellCountY; i < currentRow; i++){
 					colorCounters.pop()
 				}
 		}
-
-
 
 		this.setState({colorCounters : colorCounters})
 	}

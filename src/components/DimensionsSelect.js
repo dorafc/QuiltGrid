@@ -14,7 +14,7 @@ class DimensionsSelect extends Component {
 		      	onChange={(e) => this.props.change(e)}
 		      	name = "cellCountX"
 		      />
-		      <label for="x-dimension"> {this.props.units} </label>
+		      <label for="x-dimension"> X{this.props.units} </label>
 
 		      <p className="dimesionsSeperator">by</p>
 
@@ -24,7 +24,7 @@ class DimensionsSelect extends Component {
 		      	onChange={(e) => this.props.change(e)}
 		      	name = "cellCountY"
 		      />
-		      <label for="y-dimension"> {this.props.units} </label>
+		      <label for="y-dimension"> Y{this.props.units} </label>
 	      </div>
 
 	    </div>
