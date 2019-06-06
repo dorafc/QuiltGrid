@@ -32,6 +32,30 @@ class QuiltGrid extends Component {
 		return {height: heightDim + 'px', width: widthDim + 'px'}
 	}
 
+	// out put grid based on form inputs
+	renderGrid(){
+		// style for the grid output
+		const gridDimensions = this.calcGrid()
+		// copy of color counters from state
+		let gridColors = this.state.colorCounters.slice()
+
+		gridColors = gridColors.map((color, i) => 
+			<Cell 
+    		colorCount = {this.state.colorCounters[i]}
+    		changeColor = {() => this.changeColor(i)}
+    	/>
+  	)
+
+		return(
+			<div 
+      	className="grid"
+      	style={gridDimensions}
+      >
+      	{gridColors}
+      </div>
+		)
+	}
+
 	// update state based on input
 	updateInputChange(event){
 		this.setState({
@@ -40,33 +64,11 @@ class QuiltGrid extends Component {
 	}
 
 	render(){
-		// style for the grid output
-		const gridDimensions = this.calcGrid()
 
 		return (
 	    <div className="QuiltGrid">
 	    	<div className="gridEditor">
-		      <div 
-		      	className="grid"
-		      	style={gridDimensions}
-		      >
-		      	<Cell 
-		      		colorCount = {this.state.colorCounters[0]}
-		      		changeColor = {() => this.changeColor(0)}
-		      	/>
-		      	<Cell 
-		      		colorCount = {this.state.colorCounters[1]}
-		      		changeColor = {() => this.changeColor(1)}
-		      	/>
-		      	<Cell 
-		      		colorCount = {this.state.colorCounters[2]}
-		      		changeColor = {() => this.changeColor(2)}
-		      	/>
-		      	<Cell 
-		      		colorCount = {this.state.colorCounters[3]}
-		      		changeColor = {() => this.changeColor(3)}
-		      	/>
-		      </div>
+		      {this.renderGrid()}
 	      </div>
 
 	      <div className="userInput">
