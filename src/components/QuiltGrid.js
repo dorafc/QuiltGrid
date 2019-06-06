@@ -9,8 +9,11 @@ class QuiltGrid extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	colorCounters: [0, 1, 2, 3]
+    	colorCounters: [0, 1, 2, 3],
+    	cellCountX: 2,
+    	cellCountY: 2,
     };
+    this.updateInputChange = this.updateInputChange.bind(this);
   }
 
 	// click function for the color cell
@@ -21,11 +24,32 @@ class QuiltGrid extends Component {
 		this.setState({colorCounters : colorCounters})
 	}
 
+	// calculate the height and width of the grid render in px
+	calcGrid(){
+		const widthDim = (50 * this.state.cellCountX) + (3 * this.state.cellCountX)
+		const heightDim = (50 * this.state.cellCountY) + (3 * this.state.cellCountY)
+
+		return {height: heightDim + 'px', width: widthDim + 'px'}
+	}
+
+	// update state based on input
+	updateInputChange(event){
+		this.setState({
+			[event.target.name] : event.target.value
+		})
+	}
+
 	render(){
+		// style for the grid output
+		const gridDimensions = this.calcGrid()
+
 		return (
 	    <div className="QuiltGrid">
 	    	<div className="gridEditor">
-		      <div className="grid">
+		      <div 
+		      	className="grid"
+		      	style={gridDimensions}
+		      >
 		      	<Cell 
 		      		colorCount = {this.state.colorCounters[0]}
 		      		changeColor = {() => this.changeColor(0)}
@@ -49,6 +73,9 @@ class QuiltGrid extends Component {
 	      	<DimensionsSelect 
 	      		label = {'Dimensions'}
 	      		units = {"cells"}
+	      		cellCountX = {this.state.cellCountX}
+	      		cellCountY = {this.state.cellCountY}
+	      		change = {(e) => this.updateInputChange(e)}
 	      	/>
 	      	<DimensionsSelect 
 	      		label = {"Cell Dimensions"}

@@ -4,7 +4,7 @@ import './style/AddColor.css';
 function AddColor() {
   return (
     <div className="AddColor">
-    	<input type="text" Value="Add Color"/>
+    	<input type="text" value="Add Color"/>
       <button className="addColor" type="button">
 	    	Add
 	  	</button>
