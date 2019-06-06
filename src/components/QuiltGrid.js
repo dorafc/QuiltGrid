@@ -14,8 +14,11 @@ class QuiltGrid extends Component {
     	// X --> # of colummns, Y --> # of rows
     	cellCountX: 2,
     	cellCountY: 2,
+    	cellHeight: 50,
+    	cellWidth: 50
     };
-    this.updateCellCount = this.updateCellCount.bind(this);
+    this.updateGridDimensions = this.updateGridDimensions.bind(this);
+    this.updateCellDimensions = this.updateCellDimensions.bind(this);
   }
 
 	// click function for the color cell
@@ -45,7 +48,6 @@ class QuiltGrid extends Component {
 			this.renderRow(row, i)
   	)
 
-		console.log(gridColors)
 		return(
 			<div 
       	className="grid"
@@ -68,11 +70,18 @@ class QuiltGrid extends Component {
 		)
 	}
 
-	// update state based on input
-	updateCellCount(event){
+	// update grid dimensions based on input
+	updateGridDimensions(event){
 		this.setState({
 			[event.target.name] : event.target.value
 		}, () => this.updateColorCounter())
+	}
+
+	// update cell dimensions based on inpuu
+	updateCellDimensions(event){
+		this.setState({
+			[event.target.name] : event.target.value
+		})
 	}
 
 	// update color counter to match values in set state
@@ -114,6 +123,7 @@ class QuiltGrid extends Component {
 	}
 
 
+	// RENDER METHOD
 	render(){
 
 		return (
@@ -126,13 +136,20 @@ class QuiltGrid extends Component {
 	      	<DimensionsSelect 
 	      		label = {'Dimensions'}
 	      		units = {"cells"}
-	      		cellCountX = {this.state.cellCountX}
-	      		cellCountY = {this.state.cellCountY}
-	      		change = {(e) => this.updateCellCount(e)}
+	      		valX = {this.state.cellCountX}
+	      		valY = {this.state.cellCountY}
+	      		nameX = "cellCountX"
+	      		nameY = "cellCountY"
+	      		change = {(e) => this.updateGridDimensions(e)}
 	      	/>
 	      	<DimensionsSelect 
 	      		label = {"Cell Dimensions"}
 	      		units = {"px"}
+	      		valX = {this.state.cellWidth}
+	      		valY = {this.state.cellHeight}
+	      		nameX = "cellWidth"
+	      		nameY = "cellHeight"
+	      		change = {(e) => this.updateCellDimensions(e)}
 	      	/>
 
 	      	<ColorList />

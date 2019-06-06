@@ -10,9 +10,9 @@ class DimensionsSelect extends Component {
 	      <div className="dimensions">
 		      <input 
 		      	type="text" 
-		      	value={this.props.cellCountX} 
+		      	value={this.props.valX} 
 		      	onChange={(e) => this.props.change(e)}
-		      	name = "cellCountX"
+		      	name = {this.props.nameX}
 		      />
 		      <label for="x-dimension"> X{this.props.units} </label>
 
@@ -20,9 +20,9 @@ class DimensionsSelect extends Component {
 
 		      <input 
 		      	type="text" 
-		      	value={this.props.cellCountY} 
+		      	value={this.props.valY} 
 		      	onChange={(e) => this.props.change(e)}
-		      	name = "cellCountY"
+		      	name = {this.props.nameY}
 		      />
 		      <label for="y-dimension"> Y{this.props.units} </label>
 	      </div>
