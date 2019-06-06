@@ -3,7 +3,7 @@ import './style/Cell.css';
 
 class Cell extends Component {
 	render(){
-		const colors = ['darkslategray', 'hotpink', 'limegreen', 'slateblue']
+		const colors = ['darkslategray', 'hotpink', 'limegreen', 'slateblue', 'teal']
 	  return (
 	    <div 
 	    	className="Cell" 

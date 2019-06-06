@@ -19,9 +19,9 @@ class QuiltGrid extends Component {
   }
 
 	// click function for the color cell
-	changeColor(i){
+	changeColor(rowNum, i){
 		let colorCounters = this.state.colorCounters.slice()
-		colorCounters[i] = colorCounters[i] + 1
+		colorCounters[rowNum][i] = colorCounters[rowNum][i] + 1
 
 		this.setState({colorCounters : colorCounters})
 	}
@@ -62,7 +62,7 @@ class QuiltGrid extends Component {
 			row.map((color, i) => 
 				<Cell 
 	    		colorCount = {this.state.colorCounters[rowNum][i]}
-	    		changeColor = {() => this.changeColor(i)}
+	    		changeColor = {() => this.changeColor(rowNum, i)}
 	    	/>
 			)
 		)
