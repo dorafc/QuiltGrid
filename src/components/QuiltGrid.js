@@ -64,6 +64,7 @@ class QuiltGrid extends Component {
 		return(
 			row.map((color, i) => 
 				<Cell 
+					key = {"row" + rowNum + "col" + i}
 	    		colorCount = {this.state.colorCounters[rowNum][i]}
 	    		changeColor = {() => this.changeColor(rowNum, i)}
 	    		height = {this.state.cellHeight}
