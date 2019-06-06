@@ -1,7 +1,7 @@
 .Cell{
 	display: block;
-	width: 50px;
-	height: 50px;
+	/*width: 50px;
+	height: 50px;*/
 	background-color: white;
 	/*border: solid 1px darkslategray;*/
 	margin: 0 0 3px 3px;

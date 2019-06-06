@@ -31,8 +31,8 @@ class QuiltGrid extends Component {
 
 	// calculate the height and width of the grid render in px
 	calcGrid(){
-		const widthDim = (50 * this.state.cellCountX) + (3 * this.state.cellCountX)
-		const heightDim = (50 * this.state.cellCountY) + (3 * this.state.cellCountY)
+		const widthDim = (this.state.cellWidth * this.state.cellCountX) + (3 * this.state.cellCountX)
+		const heightDim = (this.state.cellHeight * this.state.cellCountY) + (3 * this.state.cellCountY)
 
 		return {height: heightDim + 'px', width: widthDim + 'px'}
 	}
@@ -65,6 +65,8 @@ class QuiltGrid extends Component {
 				<Cell 
 	    		colorCount = {this.state.colorCounters[rowNum][i]}
 	    		changeColor = {() => this.changeColor(rowNum, i)}
+	    		height = {this.state.cellHeight}
+	    		width = {this.state.cellWidth}
 	    	/>
 			)
 		)
