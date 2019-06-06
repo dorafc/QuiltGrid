@@ -46,8 +46,14 @@ class QuiltGrid extends Component {
 	      </div>
 
 	      <div className="userInput">
-	      	<DimensionsSelect />
-	      	<DimensionsSelect />
+	      	<DimensionsSelect 
+	      		label = {'Dimensions'}
+	      		units = {"cells"}
+	      	/>
+	      	<DimensionsSelect 
+	      		label = {"Cell Dimensions"}
+	      		units = {"px"}
+	      	/>
 
 	      	<ColorList />
 

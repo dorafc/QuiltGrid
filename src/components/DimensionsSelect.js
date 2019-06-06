@@ -1,23 +1,25 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './style/DimensionsSelect.css';
 
-function DimensionsSelect() {
-  return (
-    <div className="dimensionsSelect">
-      <h2 className="dimensionLabel">DimensionSelect</h2>
+class DimensionsSelect extends Component {
+  render(){
+  	return (
+	    <div className="dimensionsSelect">
+	      <h2 className="dimensionLabel">{this.props.label}</h2>
 
-      <div className="dimensions">
-	      <input type="text" name="x-dimension" />
-	      <label for="x-dimension"> X </label>
+	      <div className="dimensions">
+		      <input type="text" name="x-dimension" />
+		      <label for="x-dimension"> {this.props.units} </label>
 
-	      <p class="dimesionsSeperator">by</p>
+		      <p class="dimesionsSeperator">by</p>
 
-	      <input type="text" name="y-dimension" />
-	      <label for="y-dimension"> Y </label>
-      </div>
+		      <input type="text" name="y-dimension" />
+		      <label for="y-dimension"> {this.props.units} </label>
+	      </div>
 
-    </div>
-  );
+	    </div>
+	  );
+  }
 }
 
 export default DimensionsSelect;
