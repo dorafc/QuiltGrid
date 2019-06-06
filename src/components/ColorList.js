@@ -4,15 +4,25 @@ import AddColor from './AddColor';
 import './style/ColorList.css';
 
 class ColorList extends Component {
+
+	renderColorList(){
+		const colors = this.props.colorList.map((color) => 
+			<li key = {color}>
+				<Color 
+					color = {color}
+				/>
+			</li>
+		)
+
+		return colors
+	}
+
 	render(){
 		return (
 	    <div className="ColorList">
 	    	<h2>Colors</h2>
 	      <ul>
-			    <li><Color /></li>
-			    <li><Color /></li>
-			    <li><Color /></li>
-			    <li><Color /></li>
+			    {this.renderColorList()}
 	      </ul>
 	      <AddColor />
 	    </div>
