@@ -9,11 +9,11 @@ class QuiltGrid extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	colorCounters: [0, 1, 2, 3],
+    	colorCounters: [[0, 1], [2, 3]],
     	cellCountX: 2,
     	cellCountY: 2,
     };
-    this.updateInputChange = this.updateInputChange.bind(this);
+    this.updateCellCount = this.updateCellCount.bind(this);
   }
 
 	// click function for the color cell
@@ -57,11 +57,51 @@ class QuiltGrid extends Component {
 	}
 
 	// update state based on input
-	updateInputChange(event){
+	updateCellCount(event){
 		this.setState({
 			[event.target.name] : event.target.value
-		})
+		}, () => this.updateColorCounter())
 	}
+
+	// update color counter to match values in set state
+	updateColorCounter(){
+		const currentRow = this.state.colorCounters.length
+		const currentCol = this.state.colorCounters[0].length
+		let colorCounters = this.state.colorCounters.slice()
+
+		// add to every row
+		if (this.state.cellCountY > currentCol && this.state.cellCountY !== ''){
+			colorCounters.forEach((row) => {
+				for (let i = currentCol; i < this.state.cellCountY; i++){
+					row.push(0)
+				}
+			})
+		// remove from every row
+		}	else if (this.state.cellCountY < currentCol && this.state.cellCountY !== ''){
+			colorCounters.forEach((row) => {
+				for (let i = this.state.cellCountY; i < currentCol; i++){
+					row.pop()
+				}
+			})
+		}
+
+		// add row
+		if (this.state.cellCountX > currentRow && this.state.cellCountX !== ''){
+			for (let i = currentRow; i < this.state.cellCountX; i++){
+					colorCounters.push(Array(colorCounters[0].length).fill(0))
+				}
+		}
+		if (this.state.cellCountX < currentRow && this.state.cellCountX !== ''){
+			for (let i = this.state.cellCountX; i < currentRow; i++){
+					colorCounters.pop()
+				}
+		}
+
+
+
+		this.setState({colorCounters : colorCounters})
+	}
+
 
 	render(){
 
@@ -77,7 +117,7 @@ class QuiltGrid extends Component {
 	      		units = {"cells"}
 	      		cellCountX = {this.state.cellCountX}
 	      		cellCountY = {this.state.cellCountY}
-	      		change = {(e) => this.updateInputChange(e)}
+	      		change = {(e) => this.updateCellCount(e)}
 	      	/>
 	      	<DimensionsSelect 
 	      		label = {"Cell Dimensions"}
