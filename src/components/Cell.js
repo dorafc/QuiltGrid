@@ -3,13 +3,16 @@ import './style/Cell.css';
 
 class Cell extends Component {
 	render(){
-		const colors = ['darkslategray', 'hotpink', 'limegreen', 'slateblue', 'lightseagreen']
+		const colors = this.props.colors
+		const bgColor = colors[this.props.colorCount % colors.length]
+		const styleHeight = this.props.height + 'px'
+		const styleWidth = this.props.width + 'px'
 		// const dimensions = height: this.props.height + 'px', width: this.props.width + 'px'
 
 	  return (
 	    <div 
 	    	className="Cell" 
-	    	style={{backgroundColor: colors[this.props.colorCount % colors.length], height: this.props.height + 'px', width: this.props.width + 'px'}}
+	    	style={{backgroundColor: bgColor, height: styleHeight, width: styleWidth}}
 	    	onClick={() => this.props.changeColor()}
 	    >
 	    </div>

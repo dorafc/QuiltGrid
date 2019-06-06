@@ -15,7 +15,8 @@ class QuiltGrid extends Component {
     	cellCountX: 2,
     	cellCountY: 2,
     	cellHeight: 50,
-    	cellWidth: 50
+    	cellWidth: 50,
+    	colors: ['darkslategray', 'hotpink', 'limegreen', 'slateblue', 'lightseagreen'],
     };
     this.updateGridDimensions = this.updateGridDimensions.bind(this);
     this.updateCellDimensions = this.updateCellDimensions.bind(this);
@@ -67,6 +68,7 @@ class QuiltGrid extends Component {
 	    		changeColor = {() => this.changeColor(rowNum, i)}
 	    		height = {this.state.cellHeight}
 	    		width = {this.state.cellWidth}
+	    		colors = {this.state.colors}
 	    	/>
 			)
 		)
@@ -154,7 +156,9 @@ class QuiltGrid extends Component {
 	      		change = {(e) => this.updateCellDimensions(e)}
 	      	/>
 
-	      	<ColorList />
+	      	<ColorList 
+	      		colorList = {this.state.colors}
+	      	/>
 
 	      	<StyleOutput />
 	      </div>
