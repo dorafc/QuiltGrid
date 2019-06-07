@@ -6,12 +6,13 @@ import './style/ColorList.css';
 class ColorList extends Component {
 
 	renderColorList(){
-		const colors = this.props.colorList.map((color) => 
-			<li key = {color}>
+		const colors = this.props.colorList.map((color, i) => 
+			<li key = {color + i}>
 				<Color 
 					color = {color}
 					removeColor = {(e) => this.props.removeColor(e)}
 					updateActiveColor ={() => this.props.updateActiveColor(color)}
+					active = {(this.props.activeColor === color)}
 				/>
 			</li>
 		)

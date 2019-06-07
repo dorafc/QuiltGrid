@@ -16,3 +16,7 @@
 	height: 50px;
 	margin: 0 3px 3px 0;
 }
+
+.active{
+	outline: solid 1px black;
+}

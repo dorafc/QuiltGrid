@@ -10,14 +10,18 @@ class QuiltGrid extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	colorCounters: [['#ffffff', '#ffffff'], ['#ffffff', '#ffffff']],
+    	colorCounters: [['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'], 
+    									['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
+    									['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
+    									['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
+    									['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']],
     	activeColor: 'white',
     	// X --> # of colummns, Y --> # of rows
-    	cellCountX: 10,
-    	cellCountY: 10,
+    	cellCountX: 5,
+    	cellCountY: 5,
     	cellHeight: 30,
     	cellWidth: 30,
-    	colors: ['white', 'darkslategray', 'hotpink', 'limegreen', 'slateblue', 'lightseagreen'],
+    	colors: ['white', 'red', 'orangered', 'orange', 'yellow', 'yellowgreen', 'springgreen', 'darkgreen','blue', 'indigo', 'violet'],
     };
     this.updateGridDimensions = this.updateGridDimensions.bind(this);
     this.updateCellDimensions = this.updateCellDimensions.bind(this);
@@ -142,14 +146,21 @@ class QuiltGrid extends Component {
 		colors = colors.filter((x) => 
 			x !== color
 		)
-		this.setState({
-			colors : colors
-		})
+		if (this.state.activeColor === color){
+			this.setState({
+				colors : colors,
+				activeColor : "white"
+			})
+		} else {
+			this.setState({
+				colors : colors
+			})
+		}
+		
 	}
 
 	// update active color
 	updateActiveColor(activeColor){
-		console.log('boop')
 		this.setState({
 			activeColor
 		})
@@ -190,6 +201,7 @@ class QuiltGrid extends Component {
 	      		addColor = {(e) => this.addColor(e)}
 	      		removeColor = {(e) => this.removeColor(e)}
 	      		updateActiveColor ={(e) => this.updateActiveColor(e)}
+	      		activeColor = {this.state.activeColor}
 	      	/>
 
 	      	<StyleOutput />
