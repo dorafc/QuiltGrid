@@ -5,24 +5,35 @@ class AddColor extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	value : "Add Color"
+    	value : "Add Color",
+    	textColor : "#000"
     }
     this.storeColor = this.storeColor.bind(this)
     this.clearColor = this.clearColor.bind(this)
+    this.inputText = this.inputText.bind(this)
   }
 
   storeColor(event){
   	this.setState({
-  		value : event.target.value
+  		value : event.target.value,
+  		textColor : event.target.value
   	})
   }
 
   clearColor(event){
-  	this.props.addColor(event.target.value)
+  	this.props.addColor(this.state.value)
   	this.setState({
-  		value : "Add Color"
+  		value : "Add Color",
+  		textColor : "#000"
   	})
-  	this.preventDefault(event)
+  }
+
+  inputText(event){
+  	if (this.state.value === "Add Color"){
+	  	this.setState({
+	  		value : ""
+	  	})
+  	}
   }
 
 	render(){
@@ -32,7 +43,8 @@ class AddColor extends Component {
 	    		type="text" 
 	    		value={this.state.value} 
 	    		onChange={this.storeColor}
-	    		style={{color:this.state.value}}
+	    		onClick={this.inputText}
+	    		style={{color:this.state.textColor}}
 	    	/>
 	      <button 
 	      	className="addColor" 

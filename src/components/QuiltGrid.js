@@ -14,8 +14,8 @@ class QuiltGrid extends Component {
     	// X --> # of colummns, Y --> # of rows
     	cellCountX: 2,
     	cellCountY: 2,
-    	cellHeight: 50,
-    	cellWidth: 50,
+    	cellHeight: 30,
+    	cellWidth: 30,
     	colors: ['darkslategray', 'hotpink', 'limegreen', 'slateblue', 'lightseagreen'],
     };
     this.updateGridDimensions = this.updateGridDimensions.bind(this);
@@ -25,7 +25,7 @@ class QuiltGrid extends Component {
 	// click function for the color cell
 	changeColor(rowNum, i){
 		let colorCounters = this.state.colorCounters.slice()
-		colorCounters[rowNum][i] = colorCounters[rowNum][i] + 1
+		colorCounters[rowNum][i] = (colorCounters[rowNum][i] + 1) % this.state.colors.length
 
 		this.setState({colorCounters : colorCounters})
 	}
@@ -129,7 +129,11 @@ class QuiltGrid extends Component {
 
 	// add new color to the list
 	addColor(color){
-		console.log(color)
+		let colors = this.state.colors.slice()
+		colors.push(color)
+		this.setState({
+			colors : colors
+		})
 	}	
 
 
