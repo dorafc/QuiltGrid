@@ -24,7 +24,9 @@ class ColorList extends Component {
 	      <ul>
 			    {this.renderColorList()}
 	      </ul>
-	      <AddColor />
+	      <AddColor 
+	      	addColor = {(e) => this.props.addColor(e)}
+	      />
 	    </div>
 
 	  );

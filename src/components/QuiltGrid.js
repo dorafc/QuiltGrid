@@ -127,6 +127,11 @@ class QuiltGrid extends Component {
 		this.setState({colorCounters : colorCounters})
 	}
 
+	// add new color to the list
+	addColor(color){
+		console.log(color)
+	}	
+
 
 	// RENDER METHOD
 	render(){
@@ -159,6 +164,7 @@ class QuiltGrid extends Component {
 
 	      	<ColorList 
 	      		colorList = {this.state.colors}
+	      		addColor = {(e) => this.addColor(e)}
 	      	/>
 
 	      	<StyleOutput />
