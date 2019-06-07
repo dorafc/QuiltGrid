@@ -16,7 +16,7 @@ class QuiltGrid extends Component {
     	cellCountY: 2,
     	cellHeight: 30,
     	cellWidth: 30,
-    	colors: ['darkslategray', 'hotpink', 'limegreen', 'slateblue', 'lightseagreen'],
+    	colors: ['white', 'darkslategray', 'hotpink', 'limegreen', 'slateblue', 'lightseagreen'],
     };
     this.updateGridDimensions = this.updateGridDimensions.bind(this);
     this.updateCellDimensions = this.updateCellDimensions.bind(this);
@@ -136,6 +136,17 @@ class QuiltGrid extends Component {
 		})
 	}	
 
+	// remove color from the list
+	removeColor(color){
+		let colors = this.state.colors.slice()
+		colors = colors.filter((x) => 
+			x !== color
+		)
+		this.setState({
+			colors : colors
+		})
+	}
+
 
 	// RENDER METHOD
 	render(){
@@ -169,6 +180,7 @@ class QuiltGrid extends Component {
 	      	<ColorList 
 	      		colorList = {this.state.colors}
 	      		addColor = {(e) => this.addColor(e)}
+	      		removeColor = {(e) => this.removeColor(e)}
 	      	/>
 
 	      	<StyleOutput />

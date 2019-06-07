@@ -5,11 +5,13 @@ import './style/Color.css';
 class Color extends Component{
   render(){
   	const styleColor = this.props.color;
-  	
+
   	return (
-      <div className="Color">
-        <p style={{color: styleColor}}>{this.props.color}</p>
-        <RemoveColor />
+      <div className="Color" style={{backgroundColor: styleColor}}>
+        <RemoveColor
+
+        	removeColor = {() => this.props.removeColor(this.props.color)}
+        />
       </div>
     );
   }

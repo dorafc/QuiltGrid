@@ -10,6 +10,7 @@ class ColorList extends Component {
 			<li key = {color}>
 				<Color 
 					color = {color}
+					removeColor = {(e) => this.props.removeColor(e)}
 				/>
 			</li>
 		)
@@ -20,7 +21,7 @@ class ColorList extends Component {
 	render(){
 		return (
 	    <div className="ColorList">
-	    	<h2>Colors</h2>
+	    	<h2>Color Palette</h2>
 	      <ul>
 			    {this.renderColorList()}
 	      </ul>
