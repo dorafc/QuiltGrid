@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './style/StyleOutput.css';
 
-function StyleOutput() {
-  return (
-    <div className="StyleOutput">
-    	<textarea>
-    		Style Output
-    	</textarea>
-    </div>
-  );
+class StyleOutput extends Component{
+
+	render(){
+		return (
+      <div className="StyleOutput">
+      	<textarea value={this.props.style} readOnly />
+      </div>
+    );
+	}
 }
 
 export default StyleOutput;

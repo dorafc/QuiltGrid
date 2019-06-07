@@ -10,18 +10,18 @@ class QuiltGrid extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	colorCounters: [['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'], 
-    									['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
-    									['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
-    									['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'],
-    									['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff']],
+    	colorCounters: [['white', 'white', 'white', 'white', 'white'], 
+    									['white', 'white', 'white', 'white', 'white'],
+    									['white', 'white', 'white', 'white', 'white'],
+    									['white', 'white', 'white', 'white', 'white'],
+    									['white', 'white', 'white', 'white', 'white']],
     	activeColor: 'white',
     	// X --> # of colummns, Y --> # of rows
     	cellCountX: 5,
     	cellCountY: 5,
     	cellHeight: 30,
     	cellWidth: 30,
-    	colors: ['white', 'red', 'orangered', 'orange', 'yellow', 'yellowgreen', 'springgreen', 'darkgreen','blue', 'indigo', 'violet'],
+    	colors: ['white', 'hotpink', 'salmon', 'khaki', 'palegreen', 'aquamarine', 'skyblue', 'violet', 'pink', 'slateblue','darkslateblue'],
     };
     this.updateGridDimensions = this.updateGridDimensions.bind(this);
     this.updateCellDimensions = this.updateCellDimensions.bind(this);
@@ -166,6 +166,30 @@ class QuiltGrid extends Component {
 		})
 	}
 
+	// generate css for displaying as CSS for a single div
+	generateCSS(){
+		const styleWidth = "  width: " + this.state.cellWidth +"px;\n"
+		const styleHeight = "  height: " + this.state.cellHeight + "px;\n"
+		const styleBgColor = "  background-color: " + this.state.colorCounters[0][0] + ";\n"
+		const styleBoxShadow = this.state.colorCounters.map((row,i) => {
+			return "\n" + this.generateBoxShadowRow(row, i)
+		})
+		console.log(styleBoxShadow.toString())
+
+		return ".quilt{\n  display:block;\n" + styleWidth + styleHeight + styleBgColor +"  box-shadow: " + styleBoxShadow.toString()+ ";\n}"
+	}
+
+	// generate css for a row in the box shadow
+	generateBoxShadowRow(row, rowNum){
+		const offsetY = (rowNum * this.state.cellHeight) + "px"
+		let offsetX
+
+		return row.map((color, i) =>{
+			offsetX = (i * this.state.cellWidth) + "px"
+			return "\n\t" + offsetX + " " + offsetY + " " + color
+		})
+	}
+
 
 	// RENDER METHOD
 	render(){
@@ -204,7 +228,9 @@ class QuiltGrid extends Component {
 	      		activeColor = {this.state.activeColor}
 	      	/>
 
-	      	<StyleOutput />
+	      	<StyleOutput 
+	      		style = {this.generateCSS()}
+	      	/>
 	      </div>
 	    </div>
 	  ); 
