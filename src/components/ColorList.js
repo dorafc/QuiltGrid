@@ -11,6 +11,7 @@ class ColorList extends Component {
 				<Color 
 					color = {color}
 					removeColor = {(e) => this.props.removeColor(e)}
+					updateActiveColor ={() => this.props.updateActiveColor(color)}
 				/>
 			</li>
 		)

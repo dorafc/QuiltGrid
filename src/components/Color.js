@@ -7,9 +7,12 @@ class Color extends Component{
   	const styleColor = this.props.color;
 
   	return (
-      <div className="Color" style={{backgroundColor: styleColor}}>
+      <div 
+      	className="Color" 
+      	style={{backgroundColor: styleColor}}
+      	onClick={this.props.updateActiveColor}
+      >
         <RemoveColor
-
         	removeColor = {() => this.props.removeColor(this.props.color)}
         />
       </div>

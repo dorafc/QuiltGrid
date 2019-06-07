@@ -10,10 +10,11 @@ class QuiltGrid extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	colorCounters: [[0, 1], [2, 3]],
+    	colorCounters: [['#ffffff', '#ffffff'], ['#ffffff', '#ffffff']],
+    	activeColor: 'white',
     	// X --> # of colummns, Y --> # of rows
-    	cellCountX: 2,
-    	cellCountY: 2,
+    	cellCountX: 10,
+    	cellCountY: 10,
     	cellHeight: 30,
     	cellWidth: 30,
     	colors: ['white', 'darkslategray', 'hotpink', 'limegreen', 'slateblue', 'lightseagreen'],
@@ -25,7 +26,7 @@ class QuiltGrid extends Component {
 	// click function for the color cell
 	changeColor(rowNum, i){
 		let colorCounters = this.state.colorCounters.slice()
-		colorCounters[rowNum][i] = (colorCounters[rowNum][i] + 1) % this.state.colors.length
+		colorCounters[rowNum][i] = this.state.activeColor
 
 		this.setState({colorCounters : colorCounters})
 	}
@@ -42,7 +43,7 @@ class QuiltGrid extends Component {
 	renderGrid(){
 		// style for the grid output
 		const gridDimensions = this.calcGrid()
-		// copy of color counters from state
+		// copy of colors from state
 		let gridColors = this.state.colorCounters.slice()
 
 		gridColors = gridColors.map((row, i) => 
@@ -65,11 +66,10 @@ class QuiltGrid extends Component {
 			row.map((color, i) => 
 				<Cell 
 					key = {"row" + rowNum + "col" + i}
-	    		colorCount = {this.state.colorCounters[rowNum][i]}
+	    		color = {this.state.colorCounters[rowNum][i]}
 	    		changeColor = {() => this.changeColor(rowNum, i)}
 	    		height = {this.state.cellHeight}
 	    		width = {this.state.cellWidth}
-	    		colors = {this.state.colors}
 	    	/>
 			)
 		)
@@ -89,7 +89,7 @@ class QuiltGrid extends Component {
 		})
 	}
 
-	// update color counter to match values in set state
+	// update color counter to match grid dimensions in set state
 	updateColorCounter(){
 		const currentRow = this.state.colorCounters.length
 		const currentCol = this.state.colorCounters[0].length
@@ -99,7 +99,7 @@ class QuiltGrid extends Component {
 		if (this.state.cellCountX > currentCol && this.state.cellCountX !== ''){
 			colorCounters.forEach((row) => {
 				for (let i = currentCol; i < this.state.cellCountX; i++){
-					row.push(0)
+					row.push(this.state.activeColor)
 				}
 			})
 		// remove from every row
@@ -114,7 +114,7 @@ class QuiltGrid extends Component {
 		// add row
 		if (this.state.cellCountY > currentRow && this.state.cellCountY !== ''){
 			for (let i = currentRow; i < this.state.cellCountY; i++){
-					colorCounters.push(Array(colorCounters[0].length).fill(0))
+					colorCounters.push(Array(colorCounters[0].length).fill(this.state.activeColor))
 				}
 		}
 		// remove row
@@ -144,6 +144,14 @@ class QuiltGrid extends Component {
 		)
 		this.setState({
 			colors : colors
+		})
+	}
+
+	// update active color
+	updateActiveColor(activeColor){
+		console.log('boop')
+		this.setState({
+			activeColor
 		})
 	}
 
@@ -181,6 +189,7 @@ class QuiltGrid extends Component {
 	      		colorList = {this.state.colors}
 	      		addColor = {(e) => this.addColor(e)}
 	      		removeColor = {(e) => this.removeColor(e)}
+	      		updateActiveColor ={(e) => this.updateActiveColor(e)}
 	      	/>
 
 	      	<StyleOutput />
