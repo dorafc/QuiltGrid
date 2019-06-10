@@ -1,31 +1,39 @@
 import React, {Component} from 'react';
+import DimensionsSelectAuto from './DimensionsSelectAuto';
+import DimensionsSelectClick from './DimensionsSelectClick';
 import './style/DimensionsSelect.css';
 
 class DimensionsSelect extends Component {
   render(){
+
+  	let selectors
+
+  	if (this.props.autoUpdate) {
+  		selectors = <DimensionsSelectAuto 
+  			valX = {this.props.valX}
+  			nameX = {this.props.nameX}
+  			valY = {this.props.valY}
+  			nameY = {this.props.nameY}
+  			units = {this.props.units}
+  			change = {(e) => this.props.change(e)}
+  		/>
+		} else {
+			selectors = <DimensionsSelectClick 
+				valX = {this.props.valX}
+  			nameX = {this.props.nameX}
+  			valY = {this.props.valY}
+  			nameY = {this.props.nameY}
+  			units = {this.props.units}
+  			change = {(e) => this.props.change(e)}
+  			changeBtn = {(e) => this.props.changeBtn(e)}
+			/>
+		}
+
   	return (
 	    <div className="dimensionsSelect">
 	      <h2 className="dimensionLabel">{this.props.label}</h2>
 
-	      <div className="dimensions">
-		      <input 
-		      	type="text" 
-		      	value={this.props.valX} 
-		      	onChange={(e) => this.props.change(e)}
-		      	name = {this.props.nameX}
-		      />
-		      <label> X{this.props.units} </label>
-
-		      <p className="dimesionsSeperator">by</p>
-
-		      <input 
-		      	type="text" 
-		      	value={this.props.valY} 
-		      	onChange={(e) => this.props.change(e)}
-		      	name = {this.props.nameY}
-		      />
-		      <label> Y{this.props.units} </label>
-	      </div>
+	      {selectors}
 
 	    </div>
 	  );

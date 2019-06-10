@@ -19,11 +19,14 @@ class QuiltGrid extends Component {
     	// X --> # of colummns, Y --> # of rows
     	cellCountX: 5,
     	cellCountY: 5,
+    	storeCellCountX: 5,
+    	storeCellCountY: 5,
     	cellHeight: 30,
     	cellWidth: 30,
     	colors: ['white', 'hotpink', 'salmon', 'khaki', 'palegreen', 'aquamarine', 'skyblue', 'violet', 'pink', 'slateblue','darkslateblue'],
     };
     this.updateGridDimensions = this.updateGridDimensions.bind(this);
+    this.storeGridDimensions = this.storeGridDimensions.bind(this);
     this.updateCellDimensions = this.updateCellDimensions.bind(this);
   }
 
@@ -81,9 +84,19 @@ class QuiltGrid extends Component {
 
 	// update grid dimensions based on input
 	updateGridDimensions(event){
+		const countX = parseInt(this.state.storeCellCountX)
+		const countY = parseInt(this.state.storeCellCountY)
+		this.setState({
+			cellCountX : countX,
+			cellCountY : countY
+		}, this.updateColorCounter(countX, countY))
+	}
+
+	// store grid dimensions based on input
+	storeGridDimensions(event){
 		this.setState({
 			[event.target.name] : event.target.value
-		}, () => this.updateColorCounter())
+		})
 	}
 
 	// update cell dimensions based on inpuu
@@ -94,36 +107,36 @@ class QuiltGrid extends Component {
 	}
 
 	// update color counter to match grid dimensions in set state
-	updateColorCounter(){
+	updateColorCounter(countX, countY){
 		const currentRow = this.state.colorCounters.length
 		const currentCol = this.state.colorCounters[0].length
 		let colorCounters = this.state.colorCounters.slice()
 
 		// add to every row
-		if (this.state.cellCountX > currentCol && this.state.cellCountX !== ''){
+		if (countX > currentCol && countX !== ''){
 			colorCounters.forEach((row) => {
-				for (let i = currentCol; i < this.state.cellCountX; i++){
+					for (let i = currentCol; i < countX; i++){
 					row.push(this.state.activeColor)
 				}
 			})
 		// remove from every row
-		}	else if (this.state.cellCountX < currentCol && this.state.cellCountX !== ''){
+		}	else if (countX < currentCol && countX !== ''){
 			colorCounters.forEach((row) => {
-				for (let i = this.state.cellCountX; i < currentCol; i++){
+				for (let i = countX; i < currentCol; i++){
 					row.pop()
 				}
 			})
 		}
 
 		// add row
-		if (this.state.cellCountY > currentRow && this.state.cellCountY !== ''){
-			for (let i = currentRow; i < this.state.cellCountY; i++){
+		if (countY > currentRow && countY !== ''){
+			for (let i = currentRow; i < countY; i++){
 					colorCounters.push(Array(colorCounters[0].length).fill(this.state.activeColor))
 				}
 		}
 		// remove row
-		if (this.state.cellCountY < currentRow && this.state.cellCountY !== ''){
-			for (let i = this.state.cellCountY; i < currentRow; i++){
+		if (countY < currentRow && countY !== ''){
+			for (let i = countY; i < currentRow; i++){
 					colorCounters.pop()
 				}
 		}
@@ -174,7 +187,6 @@ class QuiltGrid extends Component {
 		const styleBoxShadow = this.state.colorCounters.map((row,i) => {
 			return "\n" + this.generateBoxShadowRow(row, i)
 		})
-		console.log(styleBoxShadow.toString())
 
 		return ".quilt{\n  display:block;\n" + styleWidth + styleHeight + styleBgColor +"  box-shadow: " + styleBoxShadow.toString()+ ";\n}"
 	}
@@ -204,11 +216,13 @@ class QuiltGrid extends Component {
 	      	<DimensionsSelect 
 	      		label = {'Dimensions'}
 	      		units = {"cells"}
-	      		valX = {this.state.cellCountX}
-	      		valY = {this.state.cellCountY}
-	      		nameX = "cellCountX"
-	      		nameY = "cellCountY"
-	      		change = {(e) => this.updateGridDimensions(e)}
+	      		valX = {this.state.storeCellCountX}
+	      		valY = {this.state.storeCellCountY}
+	      		nameX = "storeCellCountX"
+	      		nameY = "storeCellCountY"
+	      		autoUpdate = {false}
+	      		change = {(e) => this.storeGridDimensions(e)}
+	      		changeBtn = {(e) => this.updateGridDimensions(e)}
 	      	/>
 	      	<DimensionsSelect 
 	      		label = {"Cell Dimensions"}
@@ -217,6 +231,7 @@ class QuiltGrid extends Component {
 	      		valY = {this.state.cellHeight}
 	      		nameX = "cellWidth"
 	      		nameY = "cellHeight"
+	      		autoUpdate = {true}
 	      		change = {(e) => this.updateCellDimensions(e)}
 	      	/>
 
