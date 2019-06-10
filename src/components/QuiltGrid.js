@@ -181,15 +181,35 @@ class QuiltGrid extends Component {
 
 	// generate css for displaying as CSS for a single div
 	generateCSS(){
+		// const styleWidth = "  width: " + this.state.cellWidth +"px;\n"
+		// const styleHeight = "  height: " + this.state.cellHeight + "px;\n"
+		// const styleBgColor = "  background-color: " + this.state.colorCounters[0][0] + ";\n"
+		// const styleBoxShadow = this.state.colorCounters.map((row,i) => {
+		// 	return "\n" + this.generateBoxShadowRow(row, i)
+		// })
+
+		// return ".quilt{\n  display:block;\n" + styleWidth + styleHeight + styleBgColor +"  box-shadow: " + styleBoxShadow.toString()+ ";\n}"
+		return this.generateDiv() + "\n\n" + this.generateDivAfter()
+	}
+
+	// generate main div css
+	generateDiv(){
+		const divHeight =  "height: " + (this.state.cellHeight * this.state.cellCountY) + "px;\n"
+		const divWidth = "width: " + (this.state.cellWidth * this.state.cellCountX) + "px;\n"
+		const styleBgColor = "  background-color: " + this.state.colorCounters[0][0] + ";\n"
+
+		return ".quilt{\n  " + divHeight + "  " + divWidth + styleBgColor +"  display: block;\n}"
+	}
+	generateDivAfter(){
 		const styleWidth = "  width: " + this.state.cellWidth +"px;\n"
 		const styleHeight = "  height: " + this.state.cellHeight + "px;\n"
-		const styleBgColor = "  background-color: " + this.state.colorCounters[0][0] + ";\n"
 		const styleBoxShadow = this.state.colorCounters.map((row,i) => {
 			return "\n" + this.generateBoxShadowRow(row, i)
-		})
+		}).toString()
 
-		return ".quilt{\n  display:block;\n" + styleWidth + styleHeight + styleBgColor +"  box-shadow: " + styleBoxShadow.toString()+ ";\n}"
+		return ".quilt:after{\n  content:'';\n  display:block;  " + styleWidth + styleHeight + "  box-shadow: " + styleBoxShadow + ";\n}"
 	}
+
 
 	// generate css for a row in the box shadow
 	generateBoxShadowRow(row, rowNum){
