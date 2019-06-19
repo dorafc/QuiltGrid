@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/QuiltGrid/static/css/main.000c8d7c.chunk.css",
+    "main.js": "/QuiltGrid/static/js/main.c8317017.chunk.js",
+    "main.js.map": "/QuiltGrid/static/js/main.c8317017.chunk.js.map",
+    "runtime~main.js": "/QuiltGrid/static/js/runtime~main.55b16fa6.js",
+    "runtime~main.js.map": "/QuiltGrid/static/js/runtime~main.55b16fa6.js.map",
+    "static/js/2.83199d70.chunk.js": "/QuiltGrid/static/js/2.83199d70.chunk.js",
+    "static/js/2.83199d70.chunk.js.map": "/QuiltGrid/static/js/2.83199d70.chunk.js.map",
+    "index.html": "/QuiltGrid/index.html",
+    "precache-manifest.8cf660d60b0c9741e246943f4387fc30.js": "/QuiltGrid/precache-manifest.8cf660d60b0c9741e246943f4387fc30.js",
+    "service-worker.js": "/QuiltGrid/service-worker.js",
+    "static/css/main.000c8d7c.chunk.css.map": "/QuiltGrid/static/css/main.000c8d7c.chunk.css.map"
+  }
+}
